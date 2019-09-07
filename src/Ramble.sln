@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Web", "Ramble.Web\Ramble.Web.csproj", "{40A8921B-7BDC-4953-8C3F-E7ECC99AD179}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Tests", "01 Tests", "{2A78C6A5-4DD8-4F37-BA2B-FAB79B4450D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 Common", "02 Common", "{CB212522-342A-418C-AD42-3075777F2CE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Services", "03 Services", "{EBA9C5C3-AB9F-491F-BD57-F19C06C30EA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ramble.Services", "Ramble.Services\Ramble.Services.csproj", "{0927219C-BB41-457D-9420-59CC6084694D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ramble.Data", "Ramble.Data\Ramble.Data.csproj", "{1C277744-8907-40F8-86BE-391829392BFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ramble.Common", "Ramble.Common\Ramble.Common.csproj", "{6A04F765-B633-4A56-B09C-437154B9A1C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40A8921B-7BDC-4953-8C3F-E7ECC99AD179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A8921B-7BDC-4953-8C3F-E7ECC99AD179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A8921B-7BDC-4953-8C3F-E7ECC99AD179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A8921B-7BDC-4953-8C3F-E7ECC99AD179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0927219C-BB41-457D-9420-59CC6084694D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0927219C-BB41-457D-9420-59CC6084694D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0927219C-BB41-457D-9420-59CC6084694D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0927219C-BB41-457D-9420-59CC6084694D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C277744-8907-40F8-86BE-391829392BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C277744-8907-40F8-86BE-391829392BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C277744-8907-40F8-86BE-391829392BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C277744-8907-40F8-86BE-391829392BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A04F765-B633-4A56-B09C-437154B9A1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A04F765-B633-4A56-B09C-437154B9A1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A04F765-B633-4A56-B09C-437154B9A1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A04F765-B633-4A56-B09C-437154B9A1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0927219C-BB41-457D-9420-59CC6084694D} = {EBA9C5C3-AB9F-491F-BD57-F19C06C30EA1}
+		{1C277744-8907-40F8-86BE-391829392BFE} = {CB212522-342A-418C-AD42-3075777F2CE0}
+		{6A04F765-B633-4A56-B09C-437154B9A1C5} = {CB212522-342A-418C-AD42-3075777F2CE0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18C0A146-6393-4589-BC50-0674855C2CA8}
+	EndGlobalSection
+EndGlobal
