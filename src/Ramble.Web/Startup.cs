@@ -1,14 +1,18 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Ramble.Data;
-using Ramble.Data.Models;
+using Ramble.Web.Areas.Identity;
+using Ramble.Web.Middlewares;
 using System;
+using System.IO;
 using System.Net.Http;
 
 namespace Ramble.Web
@@ -16,36 +20,43 @@ namespace Ramble.Web
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContextPool<RambleDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("RambleDbContext")));
 
-            services.AddDbContextPool<RambleDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDataProtection()
+                .ProtectKeysWithDpapi()
+                .SetApplicationName("Ramble")
+                .PersistKeysToFileSystem(new DirectoryInfo(Configuration["DataProtection:Storage"]));
 
-            services.AddIdentity<RambleUserEntity, RambleUserRoleEntity>()
-              .AddEntityFrameworkStores<RambleDbContext>()
-              .AddDefaultTokenProviders();
+            services.AddRambleIdentity(Configuration.GetSection("IdentityConfiguration").Get<IdentityConfiguration>());
 
-            //services.AddIdentityServer()
-            //   .AddDeveloperSigningCredential()
-            //   .AddOperationalStore(options =>
-            //   {
-            //       // this adds the operational data from DB (codes, tokens, consents)
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.AreaViewLocationFormats.Clear();
+                options.AreaViewLocationFormats.Add("~/Areas/{2}/UI/{1}/Views/{0}.cshtml");
+                options.AreaViewLocationFormats.Add("~/Areas/{2}/UI/Shared/Views/{0}.cshtml");
+            });
 
-            //       options.ConfigureDbContext = builder => builder.UseSqlServer(Configuration.GetConnectionString("Default"));
-            //       options.EnableTokenCleanup = true;
-            //       options.TokenCleanupInterval = 30;
-            //   })
-            //   .AddInMemoryIdentityResources(Config.GetIdentityResources())
-            //   .AddInMemoryApiResources(Config.GetApiResources())
-            //   .AddInMemoryClients(Config.GetClients())
-            //   .AddAspNetIdentity<RambleUserEntity>();
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
+
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation();
+
+            services.AddTransient<InitialSetupMiddleware>();
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -53,11 +64,12 @@ namespace Ramble.Web
             });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -66,21 +78,32 @@ namespace Ramble.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<InitialSetupMiddleware>();
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseRambleIdentity(Environment);
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action=Index}/{id?}"
+                );
             });
 
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
+                if (Environment.IsDevelopment())
                 {
                     try
                     {

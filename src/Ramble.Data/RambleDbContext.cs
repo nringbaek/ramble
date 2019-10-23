@@ -6,7 +6,7 @@ using System;
 
 namespace Ramble.Data
 {
-    public class RambleDbContext : IdentityDbContext<RambleUserEntity, RambleUserRoleEntity, int>
+    public class RambleDbContext : IdentityDbContext<RambleUserEntity, RambleUserRoleEntity, string>
     {
         public DbSet<JourneyEntryEntity> JourneyEntries { get; set; }
 

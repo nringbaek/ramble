@@ -1,0 +1,29 @@
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-head {
+    .navbar-start {
+        .navbar-item:focus,
+        .navbar-item:focus-within {
+            outline: none;
+            color: #fff;
+            background-color: #20bc56;
+        }
+    }
+}
+
+.hero-body {
+    padding-top: 0;
+
+    div {
+        animation: 0.5s ease-out 0s 1 fadeInUp;
+    }
+}

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ramble.Data.Models
 {
-    public class RambleUserRoleEntity : IdentityRole<int>
+    public class RambleUserRoleEntity : IdentityRole
     {
     }
 }

@@ -1,0 +1,22 @@
+﻿@page
+@model Ramble.Web.Pages.InitialSetupModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InitialSetup</title>
+</head>
+<body>
+    <h1>Initial user setup</h1>
+    <form method="post">
+        <p>Email: <input type="text" asp-for="Setup.Email" /></p>
+        <p>Password: <input type="text" asp-for="Setup.Password" /></p>
+        <input type="submit" />
+    </form>
+</body>
+</html>

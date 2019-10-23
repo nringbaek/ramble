@@ -19,6 +19,7 @@ export function initializeApp(configurationService: ConfigurationService) {
     FrontpageComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

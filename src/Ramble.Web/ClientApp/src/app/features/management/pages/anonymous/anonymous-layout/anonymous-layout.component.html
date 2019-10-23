@@ -1,0 +1,15 @@
+<div class="columns is-marginless">
+  <div class="column content-column is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
+      <div [@fadeUpAnimation]="o.isActivated ? o.activatedRoute : ''" style="position: relative;">
+          <router-outlet #o="outlet"></router-outlet>
+      </div>
+
+      <a class="go-back" [routerLink]="['/']">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+        back to frontpage
+      </a>
+    </div>
+  <div class="column background-column is-hidden-mobile"></div>
+</div>
