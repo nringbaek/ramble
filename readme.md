@@ -1,9 +1,9 @@
-# Hangover
+# Ramble
 Readme content to be added
 
 # Environment setup
 ### Required
-.NET Core 3.0 SDK
+.NET Core 3.1 SDK
 - https://dotnet.microsoft.com/download
 
 NodeJS (includes NPM)
