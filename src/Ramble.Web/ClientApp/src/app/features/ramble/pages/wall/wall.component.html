@@ -1,1 +1,12 @@
-<p>wall works!</p>
+<ng-container *ngIf="wall">
+    <p class="title">{{ wall.name }}</p>
+    <div class="box" *ngFor="let entry of wall.entries">
+        <div class="content">
+            <p>
+                <strong>{{ entry.timestamp }}</strong>
+                <br>
+                {{ entry.content }}
+            </p>
+        </div>
+    </div>
+</ng-container>

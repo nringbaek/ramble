@@ -4,11 +4,15 @@ import { ManagementServicesModule } from '../management-services.module';
 
 export interface SessionState {
   username: string;
-  token: string;
+  bearerToken: string;
+  showFrontpage: boolean;
+  isNewSession: boolean;
 }
 
 export function createInitialState(): Partial<SessionState> {
-  return {};
+  return {
+    isNewSession: true
+  };
 }
 
 @StoreConfig({ name: 'session', resettable: true })
@@ -18,6 +22,5 @@ export class SessionStore extends Store<SessionState> {
   constructor() {
     super(createInitialState());
   }
-
 }
 

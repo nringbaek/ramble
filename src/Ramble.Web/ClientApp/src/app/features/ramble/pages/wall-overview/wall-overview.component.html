@@ -1,0 +1,8 @@
+<div class="columns is-multiline is-mobile">
+    <div class="column is-one-third">
+        <div class="box" *ngFor="let wall of walls">
+            <p class="title">{{ wall.name }}</p>
+            <a [routerLink]="[ wall.id ]">Explore wall</a>
+        </div>
+    </div>
+</div>

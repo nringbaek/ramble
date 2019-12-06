@@ -1,0 +1,27 @@
+<div class="topbar">
+    <div class="topbar-content">
+        <a [routerLink]="[ '/']" class="topbar-brand">
+            <h1>RAMBLE</h1>
+        </a>
+        <div class="topbar-context">
+            <!-- <span>Home / Something</span> -->
+        </div>
+        <div class="topbar-actions">
+            <div class="dropdown is-right" [class.is-active]="isUserDropdownActive">
+                <div class="dropdown-trigger" (click)="isUserDropdownActive = !isUserDropdownActive">
+                    <span>nbr@navanto.dk</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="dropdown-menu" role="menu" appClickOutside (clickOutside)="isUserDropdownActive = false">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item">Settings</a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" href="/_authentication/signout?returnurl=/walls">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

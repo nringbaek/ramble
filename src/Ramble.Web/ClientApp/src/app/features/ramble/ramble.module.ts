@@ -7,6 +7,7 @@ import { ImageComponent } from './components/image/image.component';
 import { TextComponent } from './components/text/text.component';
 import { VideoComponent } from './components/video/video.component';
 import { WallComponent } from './pages/wall/wall.component';
+import { WallOverviewComponent } from './pages/wall-overview/wall-overview.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { WallComponent } from './pages/wall/wall.component';
     ImageComponent,
     TextComponent,
     VideoComponent,
-    WallComponent],
+    WallComponent,
+    WallOverviewComponent],
   imports: [
     SharedModule,
     RambleRoutingModule

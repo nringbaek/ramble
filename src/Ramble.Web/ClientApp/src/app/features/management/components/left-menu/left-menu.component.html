@@ -1,0 +1,26 @@
+<div class="main-menu">
+    <div class="main-menu-items">
+        <a class="main-menu-item" [routerLink]="['/management']">
+            <img src="https://via.placeholder.com/24" />
+            <span>Dashboard</span>
+        </a>
+        <a class="main-menu-item" [routerLink]="['/management/walls']">
+            <img src="https://via.placeholder.com/24" />
+            <span>Walls</span>
+        </a>
+
+        <a class="main-menu-item">
+            <img src="https://via.placeholder.com/24" />
+            <span>Settings</span>
+        </a>
+    </div>
+
+    <div class="main-menu-context">
+        <span (click)="toggleMinMaximize()">
+            <span class="icon">
+                <i class="fas" [ngClass]="isMaximized ? 'fa-arrow-alt-circle-left' : 'fa-arrow-alt-circle-right'"></i>
+            </span>
+            <span>{{ isMaximized ? "Minimize" : "" }}</span>
+        </span>
+    </div>
+</div>

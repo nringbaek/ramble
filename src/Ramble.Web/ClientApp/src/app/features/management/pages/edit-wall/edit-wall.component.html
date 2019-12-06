@@ -1,0 +1,22 @@
+<p class="title">{{ wall.name }}</p>
+<a [routerLink]="[ 'entries', 'create' ]">Create entry</a>
+
+<div class="box">
+    <p class="title is-5">Entries</p>
+    <table class="table">
+        <thead>
+            <th>Type</th>
+            <th>Timestamp</th>
+            <th class="is-narrow"></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of wall.entries">
+                <td>{{ item.type }}</td>
+                <td>{{ item.timestamp }}</td>
+                <td>
+                    <a [routerLink]="[ 'entries', item.id ]">Edit entry</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

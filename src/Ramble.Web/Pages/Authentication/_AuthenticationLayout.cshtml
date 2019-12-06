@@ -1,0 +1,33 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Title"] - RAMBLE</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="~/_authentication/libs/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="~/_authentication/styles/bulma.min.css" rel="stylesheet">
+    <link href="~/_authentication/styles/idp-styles.css" rel="stylesheet">
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div class="columns is-marginless">
+        <div class="column content-column is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
+            <div>
+                @RenderBody()
+            </div>
+
+            <a class="go-back" href="/">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                back to frontpage
+            </a>
+        </div>
+        <div class="column background-column is-hidden-mobile"></div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

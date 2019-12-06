@@ -7,7 +7,7 @@ namespace Ramble.Web.Middlewares
 {
     public class InitialSetupMiddleware : IMiddleware
     {
-        private static bool _requiresSetupCheck = true;
+        private static bool RequiresSetupCheck = true;
         private readonly RambleDbContext _dbContext;
 
         public InitialSetupMiddleware(RambleDbContext dbContext)
@@ -17,24 +17,26 @@ namespace Ramble.Web.Middlewares
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (_requiresSetupCheck)
+            if (RequiresSetupCheck)
             {
-                var hasUsers = await _dbContext.Users.AnyAsync();
-                if (hasUsers)
-                {
-                    _requiresSetupCheck = false;
-                    await next(context);
-                }
-                else
+                if (await ShouldPerformInitialSetup(_dbContext))
                 {
                     if (context.Request.Path.StartsWithSegments("/initialsetup"))
                         await next(context);
                     else
                         context.Response.Redirect("/initialsetup");
                 }
+                else
+                {
+                    RequiresSetupCheck = false;
+                    await next(context);
+                }
             }
             else
                 await next(context);
         }
+
+        public static async Task<bool> ShouldPerformInitialSetup(RambleDbContext context) =>
+            await context.Users.AnyAsync() == false;
     }
 }

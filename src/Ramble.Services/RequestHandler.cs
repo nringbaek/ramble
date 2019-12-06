@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ramble.Services
 {
-    public abstract class RequestHandler<TRequest> : IRequestHandler<TRequest, RequestResult> where TRequest : Request
+    public abstract class RequestHandler<TRequest> : IRequestHandler<TRequest, RequestResult> where TRequest : Request<TRequest>
     {
         protected ILogger<RequestHandler<TRequest>> Logger { get; }
 

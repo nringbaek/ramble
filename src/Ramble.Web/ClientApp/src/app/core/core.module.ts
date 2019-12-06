@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreRoutingModule } from './core-routing.module';
 import { FrontpageComponent } from './pages/frontpage/frontpage.component';
 import { ConfigurationService } from './services/configuration.service';
+import { GraphQLModule } from './graphql.module';
 
 export function initializeApp(configurationService: ConfigurationService) {
   return async (): Promise<any> => {
@@ -23,7 +24,8 @@ export function initializeApp(configurationService: ConfigurationService) {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    GraphQLModule,
   ],
   exports: [
     SharedModule,

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { SessionQuery } from '../state';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { SessionQuery, SessionService } from '../state';
+import { map, switchMap } from 'rxjs/operators';
 import { ManagementServicesModule } from '../management-services.module';
 
 @Injectable({
@@ -10,21 +10,29 @@ import { ManagementServicesModule } from '../management-services.module';
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private router: Router,
-    private sessionQuery: SessionQuery
+    private sessionQuery: SessionQuery,
+    private sessionService: SessionService
   ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.sessionQuery.isLoggedIn$.pipe(
-      map(result => {
+      switchMap(result => {
         if (result) {
-          return true;
+          return of(true);
         }
 
-        window.location.href = '/idp/account/login?returnurl=' + state.url;
-        return false;
+        return this.sessionQuery.isNewSession$.pipe(
+          switchMap(isNewSession => {
+            if (isNewSession) {
+              return this.sessionService.signIn(state.url);
+            } else {
+              return of(false);
+            }
+          })
+        );
       })
     );
   }
