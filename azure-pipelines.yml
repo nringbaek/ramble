@@ -8,10 +8,26 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+  
 variables:
-  buildConfiguration: 'Release'
+  configuration: Release
 
 steps:
-- script: dotnet build src/Ramble.Web/Ramble.Web.csproj --configuration $(buildConfiguration)
-  displayName: 'dotnet build src/Ramble.Web/Ramble.Web.csproj $(buildConfiguration)'
+- task: UseDotNet@2
+  displayName: 'Install .NET Core SDK'
+  inputs:
+    version: 3.1.x
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Build (Ramble)'
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration $(configuration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run tests (Ramble)'
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(configuration)'

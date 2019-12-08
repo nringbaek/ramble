@@ -1,6 +1,8 @@
 # Ramble
 Readme content to be added
 
+[![Build Status](https://dev.azure.com/navanto/Ramble/_apis/build/status/Ramble%20build?branchName=master)](https://dev.azure.com/navanto/Ramble/_build/latest?definitionId=1&branchName=master)
+
 # Environment setup
 ### Required
 .NET Core 3.1 SDK
