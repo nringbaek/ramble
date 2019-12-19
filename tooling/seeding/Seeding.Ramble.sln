@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seeding.Ramble", "Seeding.Ramble\Seeding.Ramble.csproj", "{BD6FE983-402E-4980-A3B4-FD6D3BB14FA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Ramble", "01 Ramble", "{041BDC7E-56F8-4C01-A607-F08F3606091B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Data.Infrastructure.Mssql", "..\..\src\Ramble.Data.Infrastructure.Mssql\Ramble.Data.Infrastructure.Mssql.csproj", "{807C3EFE-5E5A-468C-8F3C-732ECB0DCAD8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Data", "..\..\src\Ramble.Data\Ramble.Data.csproj", "{3E308F78-9F5E-417F-8C3F-E92C788EC955}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Common", "..\..\src\Ramble.Common\Ramble.Common.csproj", "{8FD6728F-F4B2-4DF3-B886-FDABE51C61A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seeding.Ramble.Data", "Seeding.Ramble.Data\Seeding.Ramble.Data.csproj", "{A527034B-C627-4D79-8976-0531495BCC67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD6FE983-402E-4980-A3B4-FD6D3BB14FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD6FE983-402E-4980-A3B4-FD6D3BB14FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD6FE983-402E-4980-A3B4-FD6D3BB14FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6FE983-402E-4980-A3B4-FD6D3BB14FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{807C3EFE-5E5A-468C-8F3C-732ECB0DCAD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807C3EFE-5E5A-468C-8F3C-732ECB0DCAD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807C3EFE-5E5A-468C-8F3C-732ECB0DCAD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807C3EFE-5E5A-468C-8F3C-732ECB0DCAD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E308F78-9F5E-417F-8C3F-E92C788EC955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E308F78-9F5E-417F-8C3F-E92C788EC955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E308F78-9F5E-417F-8C3F-E92C788EC955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E308F78-9F5E-417F-8C3F-E92C788EC955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FD6728F-F4B2-4DF3-B886-FDABE51C61A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD6728F-F4B2-4DF3-B886-FDABE51C61A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD6728F-F4B2-4DF3-B886-FDABE51C61A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD6728F-F4B2-4DF3-B886-FDABE51C61A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A527034B-C627-4D79-8976-0531495BCC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A527034B-C627-4D79-8976-0531495BCC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A527034B-C627-4D79-8976-0531495BCC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A527034B-C627-4D79-8976-0531495BCC67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{807C3EFE-5E5A-468C-8F3C-732ECB0DCAD8} = {041BDC7E-56F8-4C01-A607-F08F3606091B}
+		{3E308F78-9F5E-417F-8C3F-E92C788EC955} = {041BDC7E-56F8-4C01-A607-F08F3606091B}
+		{8FD6728F-F4B2-4DF3-B886-FDABE51C61A0} = {041BDC7E-56F8-4C01-A607-F08F3606091B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0ED24EEC-43A0-4EC8-8F7A-FCBABC49F87C}
+	EndGlobalSection
+EndGlobal

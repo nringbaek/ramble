@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarking.Ramble", "Benc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Ramble", "01 Ramble", "{221062B8-FCDD-4607-A32B-6E0A96E8E257}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Services", "..\src\Ramble.Services\Ramble.Services.csproj", "{30946A32-A33E-473B-83D3-66CB19D7995C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Services", "..\..\src\Ramble.Services\Ramble.Services.csproj", "{30946A32-A33E-473B-83D3-66CB19D7995C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Common", "..\src\Ramble.Common\Ramble.Common.csproj", "{F0FD71DA-4370-4F2E-BB25-775E12107607}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Common", "..\..\src\Ramble.Common\Ramble.Common.csproj", "{F0FD71DA-4370-4F2E-BB25-775E12107607}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ramble.Services\Ramble.Services.csproj" />
+    <ProjectReference Include="..\..\..\src\Ramble.Services\Ramble.Services.csproj" />
   </ItemGroup>
 
 </Project>
