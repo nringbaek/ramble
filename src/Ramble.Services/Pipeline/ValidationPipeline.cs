@@ -1,26 +1,19 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
-using Ramble.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ramble.Services.Pipeline
 {
-    public class ValidationPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TResponse : class
+    public class ValidationPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TResponse : RequestResult
     {
-        private static readonly Dictionary<Type, RequestValidator<TRequest>> _cachedValidators =
-            new Dictionary<Type, RequestValidator<TRequest>>();
-        
-        private readonly IRequestContext _requestContext;
-
-        public ValidationPipeline(IRequestContext requestContext)
-        {
-            _requestContext = requestContext;
-        }
+        private static readonly Dictionary<Type, RequestValidator<TRequest>?> _cachedValidators =
+            new Dictionary<Type, RequestValidator<TRequest>?>();
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
@@ -28,13 +21,13 @@ namespace Ramble.Services.Pipeline
             {
                 var validationResult = await requestValidator.ValidateAsync(request, cancellationToken);
                 if (!validationResult.IsValid)
-                    return CreateErrorResponse(validationResult) as TResponse;
+                    return (TResponse) CreateErrorResponse(validationResult);
             }
 
             return await next();
         }
 
-        private bool TryGetRequestValidator(out RequestValidator<TRequest> requestValidator)
+        private bool TryGetRequestValidator([NotNullWhen(true)] out RequestValidator<TRequest>? requestValidator)
         {
             if (!_cachedValidators.TryGetValue(typeof(TRequest), out requestValidator))
             {
@@ -44,9 +37,8 @@ namespace Ramble.Services.Pipeline
 
                 lock (_cachedValidators)
                 {
-                    requestValidator = validatorType != null
-                        ? Activator.CreateInstance(validatorType) as RequestValidator<TRequest>
-                        : null;
+                    requestValidator = validatorType == null ? null
+                        : Activator.CreateInstance(validatorType) as RequestValidator<TRequest>;
 
                     _cachedValidators.TryAdd(typeof(TRequest), requestValidator);
                 }

@@ -1,5 +1,5 @@
 ﻿using Ramble.Common;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,11 +7,11 @@ namespace Ramble.Services.Authorization
 {
     public class HasRoleRule : IAuthorizationRule
     {
-        public string[] Roles { get; set; }
+        public List<string> Roles { get; }
 
         public HasRoleRule(params string[] roles)
         {
-            Roles = roles;
+            Roles = roles.ToList();
         }
 
         public class RequiresRoleEngine : AuthorizationRuleEngine<HasRoleRule>

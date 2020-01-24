@@ -4,14 +4,12 @@ using Ramble.Data;
 using Ramble.Data.Models;
 using Ramble.Services.Repository.Wall;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Ramble.Services.Tests.Repository.Wall
 {
-    public class DeleteWallTests
+    public class DeleteWallTests : IDisposable
     {
         private readonly RambleDbContext _dbContext;
 
@@ -23,7 +21,8 @@ namespace Ramble.Services.Tests.Repository.Wall
             _dbContext.Walls.Add(new WallEntity
             {
                 Id = 1,
-                Name = "Test"
+                Name = "Test",
+                CreatorId = Guid.NewGuid().ToString()
             });
 
             _dbContext.SaveChanges();
@@ -48,5 +47,28 @@ namespace Ramble.Services.Tests.Repository.Wall
             Assert.True(result.IsError);
             Assert.NotEmpty(await _dbContext.Walls.ToListAsync());
         }
+
+        #region IDisposable support
+        private bool _disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

@@ -17,7 +17,6 @@ namespace Ramble.Services.Core.Files
         public async Task<bool> AddFile(string id, byte[] data)
         {
             var (folder, filename) = SplitFileId(id, _fileBasePath);
-
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(Path.Combine(folder));
 
@@ -29,7 +28,6 @@ namespace Ramble.Services.Core.Files
         public Task<bool> DeleteFile(string id)
         {
             var (folder, filename) = SplitFileId(id, _fileBasePath);
-            
             var file = Path.Combine(folder, filename);
             if (File.Exists(file))
                 File.Delete(file);
@@ -37,10 +35,9 @@ namespace Ramble.Services.Core.Files
             return Task.FromResult(true);
         }
 
-        public async Task<byte[]> TryGetFile(string id)
+        public async Task<byte[]?> TryGetFile(string id)
         {
             var (folder, filename) = SplitFileId(id, _fileBasePath);
-
             var file = Path.Combine(folder, filename);
             if (File.Exists(file))
                 return await File.ReadAllBytesAsync(file);

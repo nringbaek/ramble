@@ -23,7 +23,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Data.Infrastructure.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Data.GraphQl", "Ramble.Data.GraphQl\Ramble.Data.GraphQl.csproj", "{1E83C8BB-C12F-4E92-A2CA-FBE341F53EEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ramble.Services.Tests", "Ramble.Services.Tests\Ramble.Services.Tests.csproj", "{AA1F84F3-34C2-4CBA-9F5D-0B4F0F11CFD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ramble.Services.Tests", "Ramble.Services.Tests\Ramble.Services.Tests.csproj", "{AA1F84F3-34C2-4CBA-9F5D-0B4F0F11CFD9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Solution", "00 Solution", "{29C55CD8-BFEA-48A0-8B2C-193C69A2E9FC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		GlobalSuppressions.cs = GlobalSuppressions.cs
+		version.json = version.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ramble.Services.StandaloneFeature", "Ramble.Services.StandaloneFeature\Ramble.Services.StandaloneFeature.csproj", "{0CE8E986-0B4C-40AF-AD8E-D53A401B3E19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +69,10 @@ Global
 		{AA1F84F3-34C2-4CBA-9F5D-0B4F0F11CFD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA1F84F3-34C2-4CBA-9F5D-0B4F0F11CFD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA1F84F3-34C2-4CBA-9F5D-0B4F0F11CFD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE8E986-0B4C-40AF-AD8E-D53A401B3E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE8E986-0B4C-40AF-AD8E-D53A401B3E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE8E986-0B4C-40AF-AD8E-D53A401B3E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE8E986-0B4C-40AF-AD8E-D53A401B3E19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +85,7 @@ Global
 		{2B3A30BB-5B25-432A-ACF6-A8CEF6748404} = {3BD002D5-831A-42D4-9352-3BC4DAD08FBD}
 		{1E83C8BB-C12F-4E92-A2CA-FBE341F53EEF} = {3BD002D5-831A-42D4-9352-3BC4DAD08FBD}
 		{AA1F84F3-34C2-4CBA-9F5D-0B4F0F11CFD9} = {2A78C6A5-4DD8-4F37-BA2B-FAB79B4450D2}
+		{0CE8E986-0B4C-40AF-AD8E-D53A401B3E19} = {EBA9C5C3-AB9F-491F-BD57-F19C06C30EA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {18C0A146-6393-4589-BC50-0674855C2CA8}

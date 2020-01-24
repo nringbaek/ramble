@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Ramble.Data;
 using Ramble.Data.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace Ramble.Web
@@ -37,7 +38,7 @@ namespace Ramble.Web
 
                     options.Events.OnRedirectToLogin = ctx =>
                     {
-                        if (ctx.Request.Path.StartsWithSegments("/api/"))
+                        if (ctx.Request.Path.StartsWithSegments("/api/", StringComparison.InvariantCultureIgnoreCase))
                             ctx.Response.StatusCode = 401;
 
                         return Task.CompletedTask;

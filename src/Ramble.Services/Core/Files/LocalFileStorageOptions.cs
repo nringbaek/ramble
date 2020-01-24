@@ -6,6 +6,6 @@ namespace Ramble.Services.Core.Files
 {
     public class LocalFileStorageOptions
     {
-        public string BasePath { get; set; }
+        public string BasePath { get; set; } = null!;
     }
 }

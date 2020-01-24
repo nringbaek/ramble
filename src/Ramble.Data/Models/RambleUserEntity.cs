@@ -7,5 +7,6 @@ namespace Ramble.Data.Models
 {
     public class RambleUserEntity : IdentityUser
     {
+        public List<WallEntity> Walls { get; set; } = null!;
     }
 }

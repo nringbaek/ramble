@@ -4,16 +4,17 @@ using Ramble.Common;
 using Ramble.Services.Authorization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ramble.Services.Pipeline
 {
-    public class AuthorizationPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TResponse : class
+    public class AuthorizationPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TResponse : RequestResult
     {
-        private static readonly Dictionary<Type, RequestAuthorizer<TRequest>> _cachedAuthorizers =
-            new Dictionary<Type, RequestAuthorizer<TRequest>>();
+        private static readonly Dictionary<Type, RequestAuthorizer<TRequest>?> _cachedAuthorizers =
+            new Dictionary<Type, RequestAuthorizer<TRequest>?>();
 
         private static readonly Dictionary<Type, Type> _cachedRuleEngineTypes =
             new Dictionary<Type, Type>();
@@ -35,10 +36,10 @@ namespace Ramble.Services.Pipeline
                     if (_cachedRuleEngineTypes.TryGetValue(ruleContainer.RuleType, out var engineType) && engineType != null)
                     {
                         var rule = ruleContainer.TransformAction(request);
-                        var ruleEngine = scope.ServiceProvider.GetRequiredService(engineType) as IAuthorizationRuleEngine;
+                        var ruleEngine = (IAuthorizationRuleEngine) scope.ServiceProvider.GetRequiredService(engineType);
                         
                         if (!await ruleEngine.IsAuthorized(rule))
-                            return new RequestResult(false, RequestResultErrorCode.Forbidden, "Unauthorized request") as TResponse;
+                            return (TResponse) new RequestResult(false, RequestResultErrorCode.Forbidden, "Unauthorized request");
                     }
                 }
             }
@@ -46,7 +47,7 @@ namespace Ramble.Services.Pipeline
             return await next();
         }
 
-        private bool TryGetRequestAuthorizer(out RequestAuthorizer<TRequest> requestAuthorizer)
+        private bool TryGetRequestAuthorizer([NotNullWhen(true)] out RequestAuthorizer<TRequest>? requestAuthorizer)
         {
             if (!_cachedAuthorizers.TryGetValue(typeof(TRequest), out requestAuthorizer))
             {
@@ -56,9 +57,8 @@ namespace Ramble.Services.Pipeline
 
                 lock (_cachedAuthorizers)
                 {
-                    requestAuthorizer = ruleAuthorizerType != null
-                        ? Activator.CreateInstance(ruleAuthorizerType) as RequestAuthorizer<TRequest>
-                        : null;
+                    requestAuthorizer = ruleAuthorizerType == null ? null
+                        : Activator.CreateInstance(ruleAuthorizerType) as RequestAuthorizer<TRequest>;
 
                     _cachedAuthorizers.TryAdd(typeof(TRequest), requestAuthorizer);
                 }

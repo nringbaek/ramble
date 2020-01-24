@@ -10,14 +10,14 @@ namespace Ramble.Data.Models
         public int Id { get; set; }
 
         public EntryType EntryType { get; set; }
-        public string EntryContent { get; set; }
+        public string EntryContent { get; set; } = null!;
         public DateTimeOffset EntryTimestamp { get; set; }
 
         public DateTimeOffset CreatedAt { get; set; }
         public DateTimeOffset UpdatedAt { get; set; }
 
         public int WallId { get; set; }
-        public WallEntity Wall { get; set; }
+        public WallEntity Wall { get; set; } = null!;
 
         public class EntityConfiguration : IEntityTypeConfiguration<WallEntryEntity>
         {

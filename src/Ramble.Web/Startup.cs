@@ -14,7 +14,6 @@ using Ramble.Data.GraphQl;
 using Ramble.Data.Infrastructure.Mssql;
 using Ramble.Services.Authorization.Rules;
 using Ramble.Services.Core.Files;
-using Ramble.Services.DependencyInjection;
 using Ramble.Web.Middlewares;
 using Ramble.Web.Services;
 using System;
@@ -44,7 +43,6 @@ namespace Ramble.Web
 
             services.AddDbContextPool<RambleDbContext>(options =>
             {
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 options.UseSqlServer(Configuration.GetConnectionString("RambleDbContext"), sql =>
                     sql.MigrationsAssembly(typeof(InfrastructureMssqlExtensions).GetTypeInfo().Assembly.GetName().Name));
             });
@@ -57,26 +55,19 @@ namespace Ramble.Web
                 options.LowercaseQueryStrings = true;
             });
 
-            services.AddControllers();            
-            var mvcBuilder = services.AddRazorPages();
-            if (Environment.IsDevelopment())
-                mvcBuilder.AddRazorRuntimeCompilation();
+            services.AddControllers();
+            services.AddRazorPages()
+                .When(Environment.IsDevelopment(), builder => builder.AddRazorRuntimeCompilation());
 
             services.AddRambleAuthentication();
-            services.AddRambleCoreServices(options =>
+            services.AddRambleCoreServices<HttpRequestContext>(options =>
             {
-                options.Configuration = Configuration;
                 options.Pipeline.GlobalAuthorizationRules.Add(new IsAuthenticatedRule());
             })
-                .AddRequestContext<HttpRequestContext>()
-                .AddFileStorage<LocalFileStorage, LocalFileStorageOptions>(options => Configuration.GetValue<string>("RambleConfiguration:Storage"));
+            .AddFileStorage<LocalFileStorage, LocalFileStorageOptions>(options => options.BasePath = Configuration.GetValue<string>("RambleConfiguration:Storage"))
+            .AddStandaloneFeature();
 
             services.AddTransient<InitialSetupMiddleware>();
-
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
 
             services.AddDataLoaderRegistry();
             services.AddGraphQL(sp => SchemaBuilder.New()
@@ -84,6 +75,11 @@ namespace Ramble.Web
                 .AddServices(sp)
                 .Create()
             );
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -102,7 +98,7 @@ namespace Ramble.Web
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            app.When(!Environment.IsDevelopment(), a => a.UseSpaStaticFiles());
 
             app.UseResponseCompression();
             app.UseInitialSetupMiddleware();
@@ -132,7 +128,7 @@ namespace Ramble.Web
                     {
                         // Use local proxy if 'ng serve' instance is running
                         var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
-                        var result = httpClient.GetAsync("http://localhost:4200/").GetAwaiter().GetResult();
+                        var result = httpClient.GetAsync(new Uri("http://localhost:4200/")).GetAwaiter().GetResult();
                         if (result.IsSuccessStatusCode)
                             spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                         else

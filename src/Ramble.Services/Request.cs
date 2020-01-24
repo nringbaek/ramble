@@ -12,8 +12,14 @@ namespace Ramble.Services
 
     public class RequestAuthorizerRule<TRequest, TRule>
     {
-        public Type RuleType { get; set; }
-        public Func<TRequest, TRule> TransformAction { get; set; }
+        public Type RuleType { get; }
+        public Func<TRequest, TRule> TransformAction { get; }
+
+        public RequestAuthorizerRule(Type ruleType, Func<TRequest, TRule> transformAction)
+        {
+            RuleType = ruleType;
+            TransformAction = transformAction;
+        }
     }
 
     public interface IRequestAuthorizer<TRequest, TRule>
@@ -33,10 +39,10 @@ namespace Ramble.Services
         public void AddRule(Type ruleType, Func<TRequest, IAuthorizationRule> transform)
         {
             Rules.Add(new RequestAuthorizerRule<TRequest, IAuthorizationRule>
-            {
-                TransformAction = transform,
-                RuleType = ruleType
-            });
+            (
+                ruleType: ruleType,
+                transformAction: transform
+            ));
         }
         
     }

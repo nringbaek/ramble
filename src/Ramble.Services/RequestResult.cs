@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ramble.Services
+﻿namespace Ramble.Services
 {
     /// <summary>
     /// The base request result class. Used to indicate whether a request was successful or not
@@ -32,7 +28,7 @@ namespace Ramble.Services
     /// <typeparam name="TValue">The result data type</typeparam>
     public class RequestResult<TValue> : RequestResult
     {
-        public TValue Value { get; private set; }
+        public TValue Value { get; private set; } = default!;
 
         public RequestResult(bool isSuccess, RequestResultErrorCode errorCode, string errorMessage)
             : base(isSuccess, errorCode, errorMessage) { }
@@ -48,8 +44,8 @@ namespace Ramble.Services
     /// <typeparam name="TErrorValue">The error type</typeparam>
     public class RequestResult<TSuccessValue, TErrorValue> : RequestResult
     {
-        public TSuccessValue SuccessValue { get; private set; }
-        public TErrorValue ErrorValue { get; private set; }
+        public TSuccessValue SuccessValue { get; private set; } = default!;
+        public TErrorValue ErrorValue { get; private set; } = default!;
 
         public RequestResult(bool isSuccess, RequestResultErrorCode errorCode, string errorMessage)
             : base(isSuccess, errorCode, errorMessage) { }

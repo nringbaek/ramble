@@ -9,7 +9,7 @@ namespace Ramble.Services.Repository.Files
 {
     public class GetFile : Request<GetFile, GetFileResult>
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
         public GetFile(int id)
         {
@@ -19,8 +19,16 @@ namespace Ramble.Services.Repository.Files
 
     public class GetFileResult
     {
-        public byte[] Data { get; set; }
-        public string Filename { get; set; }
+        public string Filename { get; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "Raw bytes for file data")]
+        public byte[] Data { get; }
+
+        public GetFileResult(string filename, byte[] data)
+        {
+            Filename = filename;
+            Data = data;
+        }
     }
 
     public class GetFileHandler : RequestHandler<GetFile, GetFileResult>
@@ -45,10 +53,10 @@ namespace Ramble.Services.Repository.Files
                 return Error(RequestResultErrorCode.NotFound);
 
             return Success(new GetFileResult
-            {
-                Data = file,
-                Filename = fileEntity.Filename
-            });
+            (
+                filename: fileEntity.Filename,
+                data: file
+            ));
         }
     }
 }

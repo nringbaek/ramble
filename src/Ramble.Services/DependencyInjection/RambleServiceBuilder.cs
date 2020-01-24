@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Ramble.Services.DependencyInjection
 {
     public class RambleServiceBuilder
     {
-        public RambleServiceBuilderOptions Options { get; private set; }
-        public RambleServiceBuilder(RambleServiceBuilderOptions options) => Options = options;
+        public IServiceCollection Services { get; }
+
+        public RambleServiceBuilder(IServiceCollection services)
+        {
+            Services = services;
+        }
     }
 }

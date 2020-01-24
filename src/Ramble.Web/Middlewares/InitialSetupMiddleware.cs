@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Ramble.Data;
+using System;
 using System.Threading.Tasks;
 
 namespace Ramble.Web.Middlewares
 {
     public class InitialSetupMiddleware : IMiddleware
     {
-        private static bool RequiresSetupCheck = true;
+        private static bool _requiresSetupCheck = true;
         private readonly RambleDbContext _dbContext;
 
         public InitialSetupMiddleware(RambleDbContext dbContext)
@@ -17,18 +18,18 @@ namespace Ramble.Web.Middlewares
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            if (RequiresSetupCheck)
+            if (_requiresSetupCheck)
             {
                 if (await ShouldPerformInitialSetup(_dbContext))
                 {
-                    if (context.Request.Path.StartsWithSegments("/initialsetup"))
+                    if (context.Request.Path.StartsWithSegments("/initialsetup", StringComparison.InvariantCultureIgnoreCase))
                         await next(context);
                     else
                         context.Response.Redirect("/initialsetup");
                 }
                 else
                 {
-                    RequiresSetupCheck = false;
+                    _requiresSetupCheck = false;
                     await next(context);
                 }
             }

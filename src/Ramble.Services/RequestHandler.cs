@@ -16,10 +16,10 @@ namespace Ramble.Services
 
         public abstract Task<RequestResult> Handle(TRequest request, CancellationToken cancellationToken);
 
-        public RequestResult Success() => new RequestResult(true, RequestResultErrorCode.None, null);
+        public RequestResult Success() => new RequestResult(true, RequestResultErrorCode.None, null!);
 
-        public RequestResult Error() => new RequestResult(false, RequestResultErrorCode.None, null);
-        public RequestResult Error(RequestResultErrorCode errorCode) => new RequestResult(false, errorCode, null);
+        public RequestResult Error() => new RequestResult(false, RequestResultErrorCode.None, null!);
+        public RequestResult Error(RequestResultErrorCode errorCode) => new RequestResult(false, errorCode, null!);
         public RequestResult Error(RequestResultErrorCode errorCode, string errorMessage) => new RequestResult(false, errorCode, errorMessage);
 
         public RequestResult Error(RequestResult result) => new RequestResult(false, result.ErrorCode, result.ErrorMessage);
@@ -37,13 +37,13 @@ namespace Ramble.Services
 
         public abstract Task<RequestResult<TValue>> Handle(TRequest request, CancellationToken cancellationToken);
 
-        public RequestResult<TValue> Success() => new RequestResult<TValue>(true, RequestResultErrorCode.None, null);
-        public RequestResult<TValue> Success(TValue result) => new RequestResult<TValue>(result, true, RequestResultErrorCode.None, null);
+        public RequestResult<TValue> Success() => new RequestResult<TValue>(true, RequestResultErrorCode.None, null!);
+        public RequestResult<TValue> Success(TValue result) => new RequestResult<TValue>(result, true, RequestResultErrorCode.None, null!);
 
-        public RequestResult<TValue> Error() => new RequestResult<TValue>(false, RequestResultErrorCode.None, null);
-        public RequestResult<TValue> Error(TValue result) => new RequestResult<TValue>(result, false, RequestResultErrorCode.None, null);
-        public RequestResult<TValue> Error(RequestResultErrorCode errorCode) => new RequestResult<TValue>(false, errorCode, null);
-        public RequestResult<TValue> Error(TValue result, RequestResultErrorCode errorCode) => new RequestResult<TValue>(result, false, errorCode, null);
+        public RequestResult<TValue> Error() => new RequestResult<TValue>(false, RequestResultErrorCode.None, null!);
+        public RequestResult<TValue> Error(TValue result) => new RequestResult<TValue>(result, false, RequestResultErrorCode.None, null!);
+        public RequestResult<TValue> Error(RequestResultErrorCode errorCode) => new RequestResult<TValue>(false, errorCode, null!);
+        public RequestResult<TValue> Error(TValue result, RequestResultErrorCode errorCode) => new RequestResult<TValue>(result, false, errorCode, null!);
         public RequestResult<TValue> Error(RequestResultErrorCode errorCode, string errorMessage) => new RequestResult<TValue>(false, errorCode, errorMessage);
         public RequestResult<TValue> Error(TValue result, RequestResultErrorCode errorCode, string errorMessage) => new RequestResult<TValue>(result, false, errorCode, errorMessage);
 
@@ -61,12 +61,12 @@ namespace Ramble.Services
 
         public abstract Task<RequestResult<TSuccessValue, TErrorValue>> Handle(TRequest request, CancellationToken cancellationToken);
 
-        public RequestResult<TSuccessValue, TErrorValue> Success(TSuccessValue successValue) => new RequestResult<TSuccessValue, TErrorValue>(successValue, RequestResultErrorCode.None, null);
+        public RequestResult<TSuccessValue, TErrorValue> Success(TSuccessValue successValue) => new RequestResult<TSuccessValue, TErrorValue>(successValue, RequestResultErrorCode.None, null!);
 
-        public RequestResult<TSuccessValue, TErrorValue> Error() => new RequestResult<TSuccessValue, TErrorValue>(false, RequestResultErrorCode.None, null);
-        public RequestResult<TSuccessValue, TErrorValue> Error(TErrorValue errorValue) => new RequestResult<TSuccessValue, TErrorValue>(errorValue, RequestResultErrorCode.None, null);
-        public RequestResult<TSuccessValue, TErrorValue> Error(RequestResultErrorCode errorCode) => new RequestResult<TSuccessValue, TErrorValue>(false, errorCode, null);
-        public RequestResult<TSuccessValue, TErrorValue> Error(TErrorValue errorValue, RequestResultErrorCode errorCode) => new RequestResult<TSuccessValue, TErrorValue>(errorValue, errorCode, null);
+        public RequestResult<TSuccessValue, TErrorValue> Error() => new RequestResult<TSuccessValue, TErrorValue>(false, RequestResultErrorCode.None, null!);
+        public RequestResult<TSuccessValue, TErrorValue> Error(TErrorValue errorValue) => new RequestResult<TSuccessValue, TErrorValue>(errorValue, RequestResultErrorCode.None, null!);
+        public RequestResult<TSuccessValue, TErrorValue> Error(RequestResultErrorCode errorCode) => new RequestResult<TSuccessValue, TErrorValue>(false, errorCode, null!);
+        public RequestResult<TSuccessValue, TErrorValue> Error(TErrorValue errorValue, RequestResultErrorCode errorCode) => new RequestResult<TSuccessValue, TErrorValue>(errorValue, errorCode, null!);
         public RequestResult<TSuccessValue, TErrorValue> Error(RequestResultErrorCode errorCode, string errorMessage) => new RequestResult<TSuccessValue, TErrorValue>(false, errorCode, errorMessage);
         public RequestResult<TSuccessValue, TErrorValue> Error(TErrorValue errorValue, RequestResultErrorCode errorCode, string errorMessage) => new RequestResult<TSuccessValue, TErrorValue>(errorValue, errorCode, errorMessage);
 

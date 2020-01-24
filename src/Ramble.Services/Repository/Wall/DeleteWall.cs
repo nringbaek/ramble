@@ -10,7 +10,7 @@ namespace Ramble.Services.Repository.Wall
 {
     public class DeleteWall : Request<DeleteWall>
     {
-        public int WallId { get; set; }
+        public int WallId { get; }
 
         public DeleteWall(int wallId)
         {

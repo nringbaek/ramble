@@ -2,6 +2,7 @@
 using Ramble.Common;
 using Ramble.Common.Core;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
@@ -15,15 +16,31 @@ namespace Ramble.Web.Services
         public HttpRequestContext(IHttpContextAccessor contextAccessor)
         {
             ServiceProvider = contextAccessor.HttpContext.RequestServices;
-            Identity = new RequestIdentity
+            Identity = contextAccessor.HttpContext.User.Identity.IsAuthenticated
+                ? GetAuthenticatedIdentity(contextAccessor)
+                : RequestIdentity.Anonymous();
+        }
+
+        private RequestIdentity GetAuthenticatedIdentity(IHttpContextAccessor contextAccessor)
+        {
+            var userId = contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var roles = contextAccessor.HttpContext.User.Claims
+                .Where(e => e.Type == ClaimTypes.Role)
+                .Select(e => e.Value)
+                .ToList();
+
+            var properties = new Dictionary<string, object>
             {
-                UserId = contextAccessor.HttpContext.User.Identity.Name,
-                IsAuthenticated = contextAccessor.HttpContext.User.Identity.IsAuthenticated,
-                Roles = contextAccessor.HttpContext.User.Claims
-                    .Where(e => e.Type == ClaimTypes.Role)
-                    .Select(e => e.Value)
-                    .ToArray()
+                { "name", contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name) },
+                { "email", contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email) }
             };
+
+            return RequestIdentity.Authenticated(
+                userId: userId,
+                roles: roles,
+                properties: properties
+            );
         }
     }
 }
