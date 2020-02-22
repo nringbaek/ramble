@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Ramble.Services.Authorization
+namespace Ramble.Common.Requests.Authorization
 {
     public interface IAuthorizationRuleEngine
     {

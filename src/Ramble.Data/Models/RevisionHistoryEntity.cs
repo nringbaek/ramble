@@ -5,10 +5,10 @@ using System;
 
 namespace Ramble.Data.Models
 {
-    public class WallEntryEntity
+    public class RevisionHistoryEntity
     {
         public int Id { get; set; }
-        public int WallId { get; set; }
+        public int EntryId { get; set; }
 
         public EntryType EntryType { get; set; }
         public string EntryContent { get; set; } = null!;
@@ -16,23 +16,18 @@ namespace Ramble.Data.Models
 
         public string CreatedById { get; set; } = null!;
         public DateTimeOffset CreatedAt { get; set; }
-        
-        public WallEntity Wall { get; set; } = null!;
+
         public RambleUserEntity CreatedBy { get; set; } = null!;
 
-        public class EntityConfiguration : IEntityTypeConfiguration<WallEntryEntity>
+        public class EntityConfiguration : IEntityTypeConfiguration<RevisionHistoryEntity>
         {
-            public void Configure(EntityTypeBuilder<WallEntryEntity> builder)
+            public void Configure(EntityTypeBuilder<RevisionHistoryEntity> builder)
             {
                 builder.HasKey(e => e.Id);
-                
-                builder.HasOne(e => e.Wall)
-                    .WithMany(e => e.WallEntries)
-                    .HasForeignKey(e => e.WallId)
-                    .IsRequired();
+                builder.HasIndex(e => e.EntryId);
 
                 builder.HasOne(e => e.CreatedBy)
-                    .WithMany(e => e.CreatedWallEntries)
+                    .WithMany()
                     .HasForeignKey(e => e.CreatedById)
                     .IsRequired();
             }

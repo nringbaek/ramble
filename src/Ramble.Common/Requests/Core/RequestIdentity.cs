@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ramble.Common.Core
+namespace Ramble
 {
     public class RequestIdentity
     {

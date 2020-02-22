@@ -1,4 +1,4 @@
-﻿namespace Ramble.Services
+﻿namespace Ramble
 {
     /// <summary>
     /// The base request result class. Used to indicate whether a request was successful or not

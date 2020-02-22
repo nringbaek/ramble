@@ -12,11 +12,13 @@ namespace Ramble.Web.Pages.Authentication
         private readonly SignInManager<RambleUserEntity> _signInManager;
 
         [Required]
+        [MinLength(1)]
         [BindProperty]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
+        [MinLength(1)]
         [BindProperty]
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -24,7 +26,8 @@ namespace Ramble.Web.Pages.Authentication
         [BindProperty]
         public bool RememberLogin { get; set; }
 
-        [BindProperty]
+        [DataType(DataType.Text)]
+        [BindProperty(SupportsGet = true)]
         public string ReturnUrl { get; set; }
 
         public SigninModel(SignInManager<RambleUserEntity> signInManager)

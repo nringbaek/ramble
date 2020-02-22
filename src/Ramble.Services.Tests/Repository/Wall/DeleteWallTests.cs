@@ -22,7 +22,7 @@ namespace Ramble.Services.Tests.Repository.Wall
             {
                 Id = 1,
                 Name = "Test",
-                CreatorId = Guid.NewGuid().ToString()
+                CreatedBy = Guid.NewGuid().ToString()
             });
 
             _dbContext.SaveChanges();

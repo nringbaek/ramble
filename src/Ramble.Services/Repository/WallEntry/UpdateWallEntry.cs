@@ -12,7 +12,7 @@ namespace Ramble.Services.Repository.WallEntry
     {
         public int WallEntryId { get; set; }
 
-        public string EntryContent { get; set; }
+        public string EntryContent { get; set; } = null!;
         public DateTime? EntryTimestamp { get; set; }
 
         public class Validator : RequestValidator<UpdateWallEntry>

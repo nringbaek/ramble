@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ManagementApiService } from '../../services/management-api.service';
 import gql from 'graphql-tag';
 import { Subscription } from 'rxjs';
@@ -70,13 +70,14 @@ export class EditWallEntryComponent implements OnInit, OnDestroy {
   }
 
   saveEntry() {
+    const contentControl = this.entryForm.get('content') as AbstractControl;
     if (this.isCreatingEntry) {
-      this.managementApi.createWallEntry(this.wallId, this.entryForm.get('content').value)
+      this.managementApi.createWallEntry(this.wallId, contentControl.value)
         .subscribe(res => {
           this.router.navigate(['/management/walls', this.wallId]);
         });
     } else {
-      this.managementApi.updateWallEntry(this.wallId, this.wallEntryId, this.entryForm.get('content').value)
+      this.managementApi.updateWallEntry(this.wallId, this.wallEntryId, contentControl.value)
         .subscribe(res => {
           this.router.navigate(['/management/walls', this.wallId]);
         });

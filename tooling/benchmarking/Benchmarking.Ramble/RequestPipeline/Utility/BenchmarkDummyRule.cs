@@ -1,5 +1,5 @@
-﻿using Ramble.Common;
-using Ramble.Services.Authorization;
+﻿using Ramble;
+using Ramble.Common.Requests.Authorization;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

@@ -11,13 +11,14 @@
 
 @if (ViewContext.ModelState.IsValid == false)
 {
-    <div class="alert alert-danger">
+    <div class="notification is-danger">
         <strong>Error</strong>
-        <div asp-validation-summary="All" class="danger"></div>
+        <div asp-validation-summary="All"></div>
     </div>
 }
 
 <form asp-route-returnurl="@Model.ReturnUrl" method="post" role="form">
+    <input type="hidden" asp-for="ReturnUrl" />
     <div class="field">
         <p class="control has-icons-left has-icons-right">
             <input asp-for="Email" class="input" placeholder="Email" autofocus />

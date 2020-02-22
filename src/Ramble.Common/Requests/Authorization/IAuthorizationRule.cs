@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ramble.Services.Authorization
+namespace Ramble.Common.Requests.Authorization
 {
     public interface IAuthorizationRule
     {

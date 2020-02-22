@@ -13,5 +13,12 @@ namespace Ramble.Web
             public const string Oidc = "RambleOidc";
             public const string RambleManagementApi = "RambleManagementApi";
         }
+
+        public static class Roles
+        {
+            public const string Admin = "Admin";
+            public const string Editor = "Editor";
+            public const string Author = "Author";
+        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Moq;
-using Ramble.Common;
-using Ramble.Common.Core;
 using Ramble.Data;
 using Ramble.Data.Models;
 using Ramble.Services.Repository.Wall.Rules;
@@ -26,7 +24,7 @@ namespace Ramble.Services.Tests.Repository.Wall.Rules
             {
                 Id = 1,
                 Name = "Test",
-                CreatorId = Guid.NewGuid().ToString()
+                CreatedBy = Guid.NewGuid().ToString()
             });
 
             _dbContext.SaveChanges();
@@ -46,7 +44,7 @@ namespace Ramble.Services.Tests.Repository.Wall.Rules
         public async Task IdentityIsCreator_ReturnsTrue()
         {
             var requestContextMock = new Mock<IRequestContext>();
-            var userId = await _dbContext.Walls.Select(e => e.CreatorId).FirstAsync();
+            var userId = await _dbContext.Walls.Select(e => e.CreatedBy).FirstAsync();
             requestContextMock.Setup(e => e.Identity).Returns(RequestIdentity.Authenticated(userId, new List<string>()));
 
             var ruleEngine = new CanAdministerWallRuleEngine(_dbContext, requestContextMock.Object);

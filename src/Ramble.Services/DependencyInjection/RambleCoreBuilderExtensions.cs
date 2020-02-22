@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Ramble;
 using Ramble.Common;
 using Ramble.Services.DependencyInjection;
 using Ramble.Services.Pipeline;

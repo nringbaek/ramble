@@ -1,6 +1,6 @@
 ﻿using Benchmarking.Ramble.RequestPipeline.Utility;
 using Microsoft.Extensions.Logging;
-using Ramble.Services;
+using Ramble;
 using System.Threading;
 using System.Threading.Tasks;
 

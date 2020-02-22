@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
-using Ramble.Services.Authorization;
+using Ramble.Common.Requests.Authorization;
 using System;
 using System.Collections.Generic;
 
-namespace Ramble.Services
+namespace Ramble
 {
     public class RequestValidator<TRequest> : AbstractValidator<TRequest>
     {

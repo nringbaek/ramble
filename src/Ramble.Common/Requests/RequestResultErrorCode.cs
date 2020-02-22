@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ramble.Services
+namespace Ramble
 {
     public enum RequestResultErrorCode
     {

@@ -1,4 +1,4 @@
-<div class="main-menu">
+<div class="main-menu" [class.is-minimized]="isMinimized">
     <div class="main-menu-items">
         <a class="main-menu-item" [routerLink]="['/management']">
             <img src="https://via.placeholder.com/24" />
@@ -16,11 +16,11 @@
     </div>
 
     <div class="main-menu-context">
-        <span (click)="toggleMinMaximize()">
+        <span (click)="toggleMenuExpansion()">
             <span class="icon">
-                <i class="fas" [ngClass]="isMaximized ? 'fa-arrow-alt-circle-left' : 'fa-arrow-alt-circle-right'"></i>
+                <i class="fas" [ngClass]="isMinimized ? 'fa-arrow-alt-circle-right' : 'fa-arrow-alt-circle-left'"></i>
             </span>
-            <span>{{ isMaximized ? "Minimize" : "" }}</span>
+            <span>{{ isMinimized ? "" : "Minimize" }}</span>
         </span>
     </div>
 </div>

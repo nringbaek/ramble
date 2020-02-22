@@ -1,4 +1,4 @@
-﻿using Ramble.Common;
+﻿using Ramble.Common.Requests.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

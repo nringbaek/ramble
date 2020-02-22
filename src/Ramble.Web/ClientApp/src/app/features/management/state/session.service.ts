@@ -20,7 +20,7 @@ export class SessionService {
       );
   }
 
-  signIn(returnUrl: string = null): Observable<boolean> {
+  signIn(returnUrl: string | null = null): Observable<boolean> {
     return this.refreshSession().pipe(
       catchError(error => {
         if (returnUrl == null) {

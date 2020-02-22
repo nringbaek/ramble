@@ -6,11 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-  isUserDropdownActive = false;
+  isMobileDropdownActive = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleMobileDropdown() {
+    this.isMobileDropdownActive = !this.isMobileDropdownActive;
+  }
 }

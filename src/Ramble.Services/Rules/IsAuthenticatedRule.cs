@@ -1,4 +1,4 @@
-﻿using Ramble.Common;
+﻿using Ramble.Common.Requests.Authorization;
 using System.Threading.Tasks;
 
 namespace Ramble.Services.Authorization.Rules

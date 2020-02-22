@@ -1,7 +1,6 @@
-﻿using Ramble.Common.Core;
-using System;
+﻿using System;
 
-namespace Ramble.Common
+namespace Ramble
 {
     public interface IRequestContext
     {

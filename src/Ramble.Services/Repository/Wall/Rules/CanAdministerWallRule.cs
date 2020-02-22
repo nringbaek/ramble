@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Ramble.Common;
+using Ramble.Common.Requests.Authorization;
 using Ramble.Data;
-using Ramble.Services.Authorization;
 using System.Threading.Tasks;
 
 namespace Ramble.Services.Repository.Wall.Rules
@@ -25,7 +24,7 @@ namespace Ramble.Services.Repository.Wall.Rules
         public override async Task<bool> IsAuthorized(CanAdministerWallRule rule)
         {
             var wall = await _dbContext.Walls.FirstOrDefaultAsync(e => e.Id == rule.WallId);
-            return wall != null && wall.CreatorId == _requestContext.Identity.UserId;
+            return wall != null && wall.CreatedBy == _requestContext.Identity.UserId;
         }
     }
 }

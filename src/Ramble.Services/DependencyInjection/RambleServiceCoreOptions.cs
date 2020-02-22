@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Ramble.Services.Authorization;
+﻿using Ramble.Common.Requests.Authorization;
 using System.Collections.Generic;
 
 namespace Ramble.Services.DependencyInjection

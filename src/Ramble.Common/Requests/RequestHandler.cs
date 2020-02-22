@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ramble.Services
+namespace Ramble
 {
     public abstract class RequestHandler<TRequest> : IRequestHandler<TRequest, RequestResult> where TRequest : Request<TRequest>
     {

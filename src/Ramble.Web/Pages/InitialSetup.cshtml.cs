@@ -40,17 +40,15 @@ namespace Ramble.Web.Pages
                 UserName = Setup.Email
             };
 
-            var role = new RambleUserRoleEntity
-            {
-                Name = "Admin"
-            };
-
-            var r1 = await _userManager.CreateAsync(user, Setup.Password);
-            if (!r1.Succeeded)
+            var createUserResult = await _userManager.CreateAsync(user, Setup.Password);
+            if (!createUserResult.Succeeded)
                 return Page();
 
-            var r2 = await _roleManager.CreateAsync(role);
-            var r3 = await _userManager.AddToRoleAsync(user, "Admin");
+            await _roleManager.CreateAsync(new RambleUserRoleEntity { Name = RambleConstants.Roles.Admin });
+            await _roleManager.CreateAsync(new RambleUserRoleEntity { Name = RambleConstants.Roles.Editor });
+            await _roleManager.CreateAsync(new RambleUserRoleEntity { Name = RambleConstants.Roles.Author });
+
+            await _userManager.AddToRoleAsync(user, RambleConstants.Roles.Admin);
 
             return Redirect("/");
         }
@@ -58,9 +56,11 @@ namespace Ramble.Web.Pages
         public class SetupForm
         {
             [Required]
+            [DataType(DataType.EmailAddress)]
             public string Email { get; set; }
 
             [Required]
+            [DataType(DataType.Password)]
             public string Password { get; set; }
         }
     }

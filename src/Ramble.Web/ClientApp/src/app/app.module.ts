@@ -4,6 +4,7 @@ import { CoreModule } from './core/core.module';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     CoreModule.forRoot(),
+    MarkdownModule.forRoot(),
     environment.production ? [] : [ AkitaNgDevtools.forRoot(), AkitaNgRouterStoreModule ],
   ],
   bootstrap: [AppComponent]

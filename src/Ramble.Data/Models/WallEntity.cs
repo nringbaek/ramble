@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Collections.Generic;
 
 namespace Ramble.Data.Models
@@ -8,7 +9,9 @@ namespace Ramble.Data.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public string CreatorId { get; set; } = null!;
+
+        public string CreatedBy { get; set; } = null!;
+        public DateTimeOffset CreatedAt { get; set; }
 
         public RambleUserEntity Creator { get; set; } = null!;
         public List<WallEntryEntity> WallEntries { get; set; } = null!;
@@ -24,8 +27,8 @@ namespace Ramble.Data.Models
                     .IsRequired();
 
                 builder.HasOne(e => e.Creator)
-                    .WithMany(e => e.Walls)
-                    .HasForeignKey(e => e.CreatorId)
+                    .WithMany(e => e.CreatedWalls)
+                    .HasForeignKey(e => e.CreatedBy)
                     .IsRequired();
             }
         }

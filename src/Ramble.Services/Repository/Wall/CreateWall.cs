@@ -10,7 +10,7 @@ namespace Ramble.Services.Repository.Wall
 {
     public class CreateWall : Request<CreateWall, int>
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public class Validator : RequestValidator<CreateWall>
         {

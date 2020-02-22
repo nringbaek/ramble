@@ -14,7 +14,7 @@ namespace Ramble.Services.Repository.WallEntry
     {
         public int WallId { get; set; }
         public EntryType EntryType { get; set; }
-        public string EntryContent { get; set; }
+        public string EntryContent { get; set; } = null!;
         public DateTime EntryTimestamp { get; set; }
 
         public class Validator : RequestValidator<CreateWallEntry>
@@ -56,7 +56,6 @@ namespace Ramble.Services.Repository.WallEntry
                 EntryTimestamp = request.EntryTimestamp,
 
                 CreatedAt = DateTimeOffset.Now,
-                UpdatedAt = DateTimeOffset.Now
             };
 
             _dbContext.WallEntries.Add(wallEntry);

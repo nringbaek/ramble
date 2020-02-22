@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./left-menu.component.scss']
 })
 export class LeftMenuComponent implements OnInit {
-  isMaximized = true;
+  isMinimized = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleMinMaximize() {
-    this.isMaximized = !this.isMaximized;
+  toggleMenuExpansion() {
+    this.isMinimized = !this.isMinimized;
   }
 }

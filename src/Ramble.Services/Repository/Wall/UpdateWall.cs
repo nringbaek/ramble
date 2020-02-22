@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Ramble.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,13 +15,16 @@ namespace Ramble.Services.Repository.Wall
 
     public class UpdateWallHandler : RequestHandler<UpdateWall>
     {
-        public UpdateWallHandler(ILogger<RequestHandler<UpdateWall>> logger) : base(logger)
+        private readonly RambleDbContext _context;
+
+        public UpdateWallHandler(RambleDbContext context, ILogger<RequestHandler<UpdateWall>> logger) : base(logger)
         {
+            _context = context;
         }
 
         public override async Task<RequestResult> Handle(UpdateWall request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Success();
         }
     }
 }

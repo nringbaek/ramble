@@ -22,12 +22,12 @@ steps:
   displayName: 'Build (Ramble)'
   inputs:
     command: build
-    projects: '**/*.csproj'
+    projects: 'src/**/*.csproj'
     arguments: '--configuration $(configuration)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Run tests (Ramble)'
   inputs:
     command: test
-    projects: '**/*Tests/*.csproj'
+    projects: 'src/**/*Tests/*.csproj'
     arguments: '--configuration $(configuration)'
